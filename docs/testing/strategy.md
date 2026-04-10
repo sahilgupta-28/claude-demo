@@ -31,14 +31,23 @@ it('returns a user when found', async () => {
 
 ---
 
-## Coverage Requirements
+## Functionality coverage — target 100%
 
-| Layer      | Minimum | Test Type                       |
-|------------|---------|---------------------------------|
-| Service    | 90%     | Unit — mock the repository      |
-| Controller | 90%     | Unit — mock the service         |
-| Repository | 80%     | Unit — mock the Sequelize model |
-| Routes     | 70%     | Integration — Supertest         |
+**Goal:** Every piece of **functionality** the module exposes is covered by tests: every public method, route, branch, and error path you rely on in production.
+
+- **Aim for 100% functionality coverage** — treat anything less as temporary debt; document exceptions (e.g. third-party SDKs) in review.
+- **Line coverage** from Istanbul/Jest is a **signal**, not the goal: high line % with weak assertions is useless. Prefer exhaustive **behavioral** tests.
+- **Write more test cases:** for each feature add not only the happy path but **negative cases**, **edge cases** (empty, max length, boundaries), **authorization**, and **idempotency** where relevant.
+- Prefer **multiple focused `it` blocks** per function when behavior varies — one scenario per test is easier to debug than one giant test.
+
+| Layer      | Target   | Test Type                       |
+|------------|----------|---------------------------------|
+| Service    | **100%** functionality | Unit — mock the repository      |
+| Controller | **100%** functionality | Unit — mock the service         |
+| Repository | **100%** query/CRUD behavior | Unit — mock the Sequelize model |
+| Routes     | **100%** HTTP contract | Integration — Supertest         |
+
+Use coverage reports (`npm test -- --coverage`) to find **untested branches**, then add cases until behavior is fully described.
 
 ---
 
@@ -46,9 +55,10 @@ it('returns a user when found', async () => {
 
 - **Never** import or instantiate a real database connection in unit tests.
 - **Mock all external dependencies:** databases, email services, payment gateways, JWT.
-- **Test both paths:** the happy path and every error branch.
+- **Test both paths:** the happy path and every error branch — add **extra test cases** for each new branch or business rule.
 - **Reset mocks** in `beforeEach` to prevent test pollution.
 - Test files live in `__tests__/` inside each module folder.
+- Prefer **many small tests** over few large ones so failures point to a single behavior.
 
 ---
 

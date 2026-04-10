@@ -119,3 +119,41 @@ Full standards and patterns used in this project live in the `docs/` folder and 
 - [Auth & Security](docs/auth/security.md)
 - [Testing Strategy](docs/testing/strategy.md)
 - [Swagger / OpenAPI](docs/documentation/swagger.md)
+
+---
+
+## Documentation branches (`docs-*`)
+
+This repository includes **additional guideline packs** under `docs-*` folders (NestJS, Next.js, React, Node.js, FastAPI). You can keep **`main`** as the integration branch for the demo API and publish **each `docs-*` tree on its own Git branch** so teams can clone or track only the stack they need.
+
+**Replace `YOUR_ORG` and `YOUR_REPO`** in the links below with your GitHub organization and repository name.
+
+### Back to `main`
+
+| | |
+|--|--|
+| **`main` branch (tree)** | [https://github.com/YOUR_ORG/YOUR_REPO/tree/main](https://github.com/YOUR_ORG/YOUR_REPO/tree/main) |
+| **Root README on `main`** | [https://github.com/YOUR_ORG/YOUR_REPO/blob/main/README.md](https://github.com/YOUR_ORG/YOUR_REPO/blob/main/README.md) |
+
+### Branch links (suggested names)
+
+Each row points at the **branch root** on GitHub. Each folder has its own **README** with stack details, coverage table, and a **← Back to `main`** link.
+
+| Branch | Stack | What it is |
+|--------|--------|------------|
+| [`docs-nestjs`](https://github.com/YOUR_ORG/YOUR_REPO/tree/docs-nestjs) | NestJS + PostgreSQL + Prisma | API guidelines: DTOs/class-validator, guards, Prisma repos, `@nestjs/swagger`, Jest. [Folder README](docs-nestjs/README.md) |
+| [`docs-nextjs`](https://github.com/YOUR_ORG/YOUR_REPO/tree/docs-nextjs) | Next.js App Router + Prisma + Zod | Full-stack: RSC, Route Handlers, Server Actions, security headers, Playwright. [Folder README](docs-nextjs/README.md) |
+| [`docs-reactjs`](https://github.com/YOUR_ORG/YOUR_REPO/tree/docs-reactjs) | React (client) + Zod | SPA patterns: API client layer, MSW/RTL, browser security; no Prisma in the bundle. [Folder README](docs-reactjs/README.md) |
+| [`docs-nodejs`](https://github.com/YOUR_ORG/YOUR_REPO/tree/docs-nodejs) | Node.js (Express/Fastify) + Prisma + Zod | Classic layered HTTP API with Zod middleware and Supertest. [Folder README](docs-nodejs/README.md) |
+| [`docs-fastapi`](https://github.com/YOUR_ORG/YOUR_REPO/tree/docs-fastapi) | FastAPI + SQLAlchemy + Pydantic | Async Python: Alembic, `Depends()`, pytest + httpx. [Folder README](docs-fastapi/README.md) |
+
+### Publishing a `docs-*` folder on its own branch (example)
+
+From a clean worktree, you can make the contents of e.g. `docs-nestjs/` the root of branch `docs-nestjs`:
+
+```bash
+git subtree split -P docs-nestjs -b docs-nestjs
+git push origin docs-nestjs
+```
+
+Alternatively use a **sparse checkout** or **separate remotes** per team—pick the workflow that fits your org. The **README** inside each `docs-*` folder is written to match the “single folder = branch root” layout once published.
